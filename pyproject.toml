@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gtm-mcp"
+version = "0.1.0"
+description = "Google Tag Manager (GTM) local MCP server with governance guardrails"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "mcp[cli]>=0.1.0",
+    "fastmcp>=0.1.0",
+    "google-auth>=2.0.0",
+    "google-auth-oauthlib>=1.0.0",
+    "requests>=2.25.0",
+]
+
+[project.scripts]
+gtm-mcp = "gtm_mcp.server:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["gtm_mcp*"]

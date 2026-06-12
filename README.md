@@ -11,9 +11,14 @@ Le serveur est **model-agnostic** par design : il utilise le protocole standardi
 Pour éviter tout incident sur vos conteneurs GTM de production, le serveur applique des garde-fous stricts directement dans le code :
 
 1. **Pas de Publication ni de Suppression** : Le serveur ne dispose d'aucun outil (tool) pour publier des conteneurs, créer des versions ou supprimer des éléments.
-2. **Nomenclature Obligatoire** : Les nouveaux workspaces doivent impérativement commencer par le préfixe **`MS | `** (permettant de distinguer les workspaces gérés par l'IA des workspaces créés manuellement ou par défaut).
-3. **Protection des Espaces de Travail Existants** : Toute création de balise, déclencheur ou variable dans un espace de travail qui ne commence pas par `MS | ` (comme le `Default Workspace` ou vos workspaces manuels) est automatiquement bloquée.
+2. **Nomenclature Obligatoire** : Les nouveaux workspaces doivent impérativement commencer par le préfixe **`IA | `** (permettant de distinguer les workspaces gérés par l'IA des workspaces créés manuellement ou par défaut).
+3. **Protection des Espaces de Travail Existants** : Toute création de balise, déclencheur ou variable dans un espace de travail qui ne commence pas par `IA | ` (comme le `Default Workspace` ou vos workspaces manuels) est automatiquement bloquée.
 4. **Pas de Secrets dans le Code** : Le serveur utilise les Application Default Credentials (ADC) de Google Cloud. **Ne committez jamais de fichier `client_secrets.json` ou de clés privées sur GitHub.**
+
+> 💡 Le préfixe est personnalisable via la variable d'environnement `GTM_WORKSPACE_PREFIX` (défaut : `IA | `). Exemple avec Claude Code :
+> ```bash
+> claude mcp add gtm-mcp -e "GTM_WORKSPACE_PREFIX=XX | " -- python3 /chemin/vers/gtm-mcp/gtm_mcp/server.py
+> ```
 
 ---
 

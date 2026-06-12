@@ -28,8 +28,8 @@ from mcp.server.fastmcp import FastMCP
 # Initialize FastMCP Server
 mcp = FastMCP("Google Tag Manager")
 
-# Governance Naming Convention Prefix
-WORKSPACE_PREFIX = "MS | "
+# Governance Naming Convention Prefix (override with GTM_WORKSPACE_PREFIX env var)
+WORKSPACE_PREFIX = os.environ.get("GTM_WORKSPACE_PREFIX", "IA | ")
 GTM_API_BASE = "https://tagmanager.googleapis.com/tagmanager/v2"
 
 def get_session():
@@ -157,7 +157,7 @@ def create_gtm_workspace(parent: str, name: str, description: str = None):
     
     Args:
         parent: The parent container path (e.g., 'accounts/123456/containers/78901')
-        name: The name of the workspace. MUST start with 'MS | '
+        name: The name of the workspace. MUST start with the governance prefix (default 'IA | ', override with GTM_WORKSPACE_PREFIX)
         description: Optional description of the workspace.
     """
     if not name.startswith(WORKSPACE_PREFIX):
@@ -182,7 +182,7 @@ def create_gtm_workspace(parent: str, name: str, description: str = None):
 @mcp.tool()
 def create_gtm_tag(parent: str, tag_data: dict):
     """
-    Create a new tag in a GTM workspace. Enforced to only run in 'MS | ' workspaces.
+    Create a new tag in a GTM workspace. Enforced to only run in workspaces matching the governance prefix (default 'IA | ').
     
     Args:
         parent: The parent workspace path (e.g., 'accounts/123456/containers/78901/workspaces/12')
@@ -211,7 +211,7 @@ def create_gtm_tag(parent: str, tag_data: dict):
 @mcp.tool()
 def create_gtm_trigger(parent: str, trigger_data: dict):
     """
-    Create a new trigger in a GTM workspace. Enforced to only run in 'MS | ' workspaces.
+    Create a new trigger in a GTM workspace. Enforced to only run in workspaces matching the governance prefix (default 'IA | ').
     
     Args:
         parent: The parent workspace path (e.g., 'accounts/123456/containers/78901/workspaces/12')
@@ -240,7 +240,7 @@ def create_gtm_trigger(parent: str, trigger_data: dict):
 @mcp.tool()
 def create_gtm_variable(parent: str, variable_data: dict):
     """
-    Create a new variable in a GTM workspace. Enforced to only run in 'MS | ' workspaces.
+    Create a new variable in a GTM workspace. Enforced to only run in workspaces matching the governance prefix (default 'IA | ').
     
     Args:
         parent: The parent workspace path (e.g., 'accounts/123456/containers/78901/workspaces/12')

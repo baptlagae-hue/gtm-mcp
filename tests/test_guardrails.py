@@ -1,9 +1,10 @@
+import os
 import google.auth
 import google.auth.transport.requests
 from google.auth.transport.requests import AuthorizedSession
 import json
 
-WORKSPACE_PREFIX = "MS | "
+WORKSPACE_PREFIX = os.environ.get("GTM_WORKSPACE_PREFIX", "IA | ")
 GTM_API_BASE = "https://tagmanager.googleapis.com/tagmanager/v2"
 
 # Test Target Container
@@ -83,7 +84,7 @@ def main():
     print("SUCCESS: Non-compliant workspace creation was blocked by the guardrail!")
 
     print("\n--- TEST 2: Attempt to create workspace with compliant name ---")
-    good_name = "MS | Test Workspace"
+    good_name = f"{WORKSPACE_PREFIX}Test Workspace"
     res2 = local_create_workspace(session, container_path, good_name)
     print("Result:")
     print(json.dumps(res2, indent=2))

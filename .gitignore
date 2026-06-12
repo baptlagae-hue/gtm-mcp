@@ -1,0 +1,21 @@
+# Environnements virtuels
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+
+# Secrets — ne jamais committer
+client_secret*.json
+client_secrets.json
+*.key
+.env
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/

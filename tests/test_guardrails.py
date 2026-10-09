@@ -8,7 +8,7 @@ WORKSPACE_PREFIX = os.environ.get("GTM_WORKSPACE_PREFIX", "IA | ")
 GTM_API_BASE = "https://tagmanager.googleapis.com/tagmanager/v2"
 
 # Test Target Container
-container_path = "accounts/6213496647/containers/175438363"
+container_path = "accounts/12345678/containers/98765432"
 
 def get_session():
     credentials, project = google.auth.default(
